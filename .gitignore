@@ -6,3 +6,6 @@ eclipse/
 logs/
 .classpath
 .project
+
+/run
+/.idea
