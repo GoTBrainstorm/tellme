@@ -225,8 +225,9 @@ public class BlockInfo
 
         if (te != null)
         {
-            CompoundTag nbt = new CompoundTag();
-            te.save(nbt);
+            //CompoundTag nbt = new CompoundTag();
+            CompoundTag nbt = te.saveWithFullMetadata();
+            //te.save(nbt);
             lines.add("BlockEntity class: " + te.getClass().getName());
             lines.add("");
             lines.add("BlockEntity NBT (from BlockEntity::save()):");

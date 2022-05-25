@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import fi.dy.masa.tellme.util.datadump.DataDump;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class TagDump
 {
@@ -26,52 +29,78 @@ public class TagDump
         {
             case BLOCK:
             {
-                Map<ResourceLocation, Tag<Block>> tagMap = BlockTags.getAllTags().getAllTags();
-
-                for (Map.Entry<ResourceLocation, Tag<Block>> entry : tagMap.entrySet())
-                {
-                    addLines(dump, entry.getKey().toString(),
-                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
-                }
+                ForgeRegistries.BLOCKS.tags().stream().forEach(t -> {
+                    addLines(dump,
+                            t.getKey().location().toString(),
+                            t.stream().map(p -> p.getRegistryName().toString()),
+                            split);
+                });
+//                Map<ResourceLocation, Tag<Block>> tagMap = BlockTags.getAllTags().getAllTags();
+//
+//                for (Map.Entry<ResourceLocation, Tag<Block>> entry : tagMap.entrySet())
+//                {
+//                    addLines(dump, entry.getKey().toString(),
+//                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
+//                }
 
                 break;
             }
 
             case ITEM:
             {
-                Map<ResourceLocation, Tag<Item>> tagMap = ItemTags.getAllTags().getAllTags();
-
-                for (Map.Entry<ResourceLocation, Tag<Item>> entry : tagMap.entrySet())
-                {
-                    addLines(dump, entry.getKey().toString(),
-                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
-                }
+                ForgeRegistries.ITEMS.tags().stream().forEach(t -> {
+                    addLines(dump,
+                            t.getKey().location().toString(),
+                            t.stream().map(p -> p.getRegistryName().toString()),
+                            split);
+                });
+                //                Map<ResourceLocation, Tag<Item>> tagMap = ItemTags.getAllTags().getAllTags();
+//
+//                for (Map.Entry<ResourceLocation, Tag<Item>> entry : tagMap.entrySet())
+//                {
+//                    addLines(dump, entry.getKey().toString(),
+//                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
+//                }
 
                 break;
             }
 
             case FLUID:
             {
-                Map<ResourceLocation, Tag<Fluid>> tagMap = FluidTags.getAllTags().getAllTags();
+                ForgeRegistries.FLUIDS.tags().stream().forEach(t -> {
+                    addLines(dump,
+                            t.getKey().location().toString(),
+                            t.stream().map(p -> p.getRegistryName().toString()),
+                            split);
+                });
 
-                for (Map.Entry<ResourceLocation, Tag<Fluid>> entry : tagMap.entrySet())
-                {
-                    addLines(dump, entry.getKey().toString(),
-                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
-                }
+//                Map<ResourceLocation, Tag<Fluid>> tagMap = FluidTags.getAllTags().getAllTags();
+//
+//                for (Map.Entry<ResourceLocation, Tag<Fluid>> entry : tagMap.entrySet())
+//                {
+//                    addLines(dump, entry.getKey().toString(),
+//                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
+//                }
 
                 break;
             }
 
             case ENTITY_TYPE:
             {
-                Map<ResourceLocation, Tag<EntityType<?>>> tagMap = EntityTypeTags.getAllTags().getAllTags();
+                ForgeRegistries.ENTITIES.tags().stream().forEach(t -> {
+                    addLines(dump,
+                            t.getKey().location().toString(),
+                            t.stream().map(p -> p.getRegistryName().toString()),
+                            split);
+                });
 
-                for (Map.Entry<ResourceLocation, Tag<EntityType<?>>> entry : tagMap.entrySet())
-                {
-                    addLines(dump, entry.getKey().toString(),
-                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
-                }
+//                Map<ResourceLocation, Tag<EntityType<?>>> tagMap = EntityTypeTags.getAllTags().getAllTags();
+//
+//                for (Map.Entry<ResourceLocation, Tag<EntityType<?>>> entry : tagMap.entrySet())
+//                {
+//                    addLines(dump, entry.getKey().toString(),
+//                            entry.getValue().getValues().stream().map((b) -> b.getRegistryName().toString()), split);
+//                }
 
                 break;
             }

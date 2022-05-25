@@ -22,7 +22,7 @@ public class StructureFeatureDump
         {
             StructureFeature<?> feature = entry.getValue();
             ResourceLocation id = feature.getRegistryName();
-            dump.addData(id.toString(), feature.getFeatureName());
+            dump.addData(id.toString(), entry.getKey().toString()); //feature.getFeatureName());
         }
 
         dump.addTitle("Registry name", "Name");

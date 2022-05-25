@@ -201,6 +201,7 @@ public class BlockDump
 
     public static String getTagNamesJoined(Block block)
     {
-        return block.getTags().stream().map(ResourceLocation::toString).sorted().collect(Collectors.joining(", "));
+        return block.defaultBlockState().getTags().map(p -> p.location().toString()).sorted().collect(Collectors.joining(", "));
+        //return block.getTags().stream().map(ResourceLocation::toString).sorted().collect(Collectors.joining(", "));
     }
 }

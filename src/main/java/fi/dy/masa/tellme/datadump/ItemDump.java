@@ -98,7 +98,8 @@ public class ItemDump
 
     public static String getTagNamesJoined(Item item)
     {
-        return item.getTags().stream().map(ResourceLocation::toString).sorted().collect(Collectors.joining(", "));
+        return item.getDefaultInstance().getTags().map(p -> p.location().toString()).sorted().collect(Collectors.joining(", "));
+        //return item.getTags().stream().map(ResourceLocation::toString).sorted().collect(Collectors.joining(", "));
     }
 
     public static String getStackInfoBasic(ItemStack stack)
