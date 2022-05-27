@@ -63,6 +63,10 @@ minecraft {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', 'examplemod'
 
+            // Make sure flyWheel mixins get loaded
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             mods {
                 examplemod {
                     source sourceSets.main
@@ -142,9 +146,9 @@ repositories {
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
-    // flatDir {
-    //     dir 'libs'
-    // }
+     flatDir {
+         dir 'libs'
+     }
 }
 
 dependencies {
@@ -158,8 +162,17 @@ dependencies {
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.0.195")
+    runtimeOnly fg.deobf("cofh.coren:cofh_core-1.18.2:1.6.3.19")
+    runtimeOnly fg.deobf("cofh.thermal.foundation:thermal_foundation-1.18.2:1.6.2.27")
+    runtimeOnly fg.deobf("cofh.thermal.expansion:thermal_expansion-1.18.2:1.6.1.11")
+    runtimeOnly fg.deobf("com.jozufozu.flywheel:Flywheel-Forge-1.18:0.6.2")
+    runtimeOnly fg.deobf("com.simibubi.create:create:mc1.18.2_v0.4.1")
+    runtimeOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering-1.18.2:8.0.1-147")
+
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+    //implementation fg.deobf("mezz.jei:jei-1.18.2:9.7.0.195")
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

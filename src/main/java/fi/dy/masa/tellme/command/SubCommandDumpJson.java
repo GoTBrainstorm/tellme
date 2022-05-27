@@ -10,6 +10,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import fi.dy.masa.tellme.datadump.RecipeDump;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.world.entity.Entity;
@@ -30,7 +31,7 @@ public class SubCommandDumpJson
         @SuppressWarnings("unchecked")
         ArgumentCommandNode<CommandSourceStack, List<String>> dumpTypesNode =
                 Commands.argument("dump_types",
-                        StringCollectionArgument.create(() -> ImmutableList.of("blocks", "items-with-props"), "No dump types given"))
+                        StringCollectionArgument.create(() -> ImmutableList.of("blocks", "items-with-props", "recipes"), "No dump types given"))
                 .executes(c -> execute(c, (List<String>) c.getArgument("dump_types", List.class))).build();
 
         subCommandRootNode.addChild(dumpTypesNode);
@@ -63,6 +64,7 @@ public class SubCommandDumpJson
         switch (type)
         {
             case "blocks":              return BlockDump.getJsonBlockDump();
+            case "recipes":             return RecipeDump.getJsonRecipeDump();
             case "items-with-props":    if (entity instanceof Player) { return ItemDump.getJsonItemsWithPropsDump((Player) entity); } break;
         }
 
